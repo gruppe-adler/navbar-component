@@ -1,0 +1,15 @@
+{
+    "compilerOptions": {
+        "target": "es2015",
+        "module": "es6",
+        "sourceMap": true,
+        "declaration": true,
+        "outDir": "lib",
+        "lib" :[
+            "dom",
+            "es2015",
+            "es2017"
+        ],
+        "types": ["resize-observer-browser", "css-font-loading-module"]
+    }
+  }

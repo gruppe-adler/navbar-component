@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Gruppe Adler Navbar Test Page</title>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald|Source+Sans+Pro|Material+Icons&amp;display=swap">
+        <style>
+            html {
+                overflow-y: scroll;
+                background-color: red;
+            }
+        </style>
+        <script type="module">
+            import '/index.js';
+
+            customElements.define('grad-navbar', GradNavbar);
+        </script>
+    </head>
+    <body>
+        <grad-navbar active-path="/ueber-uns/struktur"></grad-navbar>
+    </body>
+    <script>
+        document.querySelector('grad-navbar').addEventListener('gradpathchanged', e => {
+            console.log(e);
+            e.preventDefault();
+        });
+    </script>
+</html>
