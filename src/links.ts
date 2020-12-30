@@ -82,7 +82,7 @@ export const links: GradLink[] = [
     },
     {
         displayName: 'International',
-        text: '<svg style="height: 1em;" viewBox="0 0 64 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 0V32H64V0H0Z" fill="#00247D"/><path d="M64 0L0 32M0 0L64 32L0 0Z" stroke="white" stroke-width="6.4"/><path d="M26.3852 20L0.477051 32.9541M37.5 12L63.5 -1.00003M42.5 20L64.5 31M-0.477051 0.954056L21.5358 12" stroke="#CF142B" stroke-width="2.135"/><path d="M0 16H64M32 0V32V0Z" stroke="white" stroke-width="10.6667"/><path d="M0 16H64M32 0V32V0Z" stroke="#CF142B" stroke-width="6.4"/></svg>',
+        text: '<svg aria-label="International" style="height: 1em;" viewBox="0 0 64 32" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0 0V32H64V0H0Z" fill="#00247D"/><path d="M64 0L0 32M0 0L64 32L0 0Z" stroke="white" stroke-width="6.4"/><path d="M26.3852 20L0.477051 32.9541M37.5 12L63.5 -1.00003M42.5 20L64.5 31M-0.477051 0.954056L21.5358 12" stroke="#CF142B" stroke-width="2.135"/><path d="M0 16H64M32 0V32V0Z" stroke="white" stroke-width="10.6667"/><path d="M0 16H64M32 0V32V0Z" stroke="#CF142B" stroke-width="6.4"/></svg>',
         url: '/en'
     }
 ];
