@@ -61,6 +61,15 @@ export default class GradNavbar extends HTMLElement {
      */
     connectedCallback(): void {
         this.render();
+
+        window.requestAnimationFrame(() => {
+            const navEl = this.shadowRoot.querySelector('nav');
+            if (navEl === null) return;
+
+            const { width } = navEl.getBoundingClientRect();
+
+            this.small = width < SMALL_BREAKPOINT;
+        });
     }
 
     static get observedAttributes(): string[] {

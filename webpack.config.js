@@ -59,7 +59,7 @@ module.exports = (env, options) => {
         output: {
             filename: 'index.js',
             path: path.resolve(__dirname, 'lib'),
-            libraryTarget: 'amd'
+            libraryTarget: 'umd'
         }
     };
 };
