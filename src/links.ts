@@ -57,7 +57,7 @@ export const links: GradLink[] = [
         url: '/mitspielen',
         subLinks: [
             {
-                text: 'Allgemeines',
+                text: 'Mitspielen',
                 url: '/allgemeines'
             },
             {
