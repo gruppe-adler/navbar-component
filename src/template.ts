@@ -15,11 +15,11 @@ template.innerHTML = `
             <h2 style="opacity: .5;">Deutscher Arma 3 Coop & TvT Clan</h2>
         </div>
         <button class="grad-nav__menu-btn grad-nav--only-small">
-            <svg class="grad-nav--only-opened" width="28" height="28" viewBox="0 0 28 28">
+            <svg aria-label="Navigations-Menü schließen" class="grad-nav--only-opened" width="28" height="28" viewBox="0 0 28 28">
                 <rect fill="currentColor" width="28" height="2" x="0" y="13" transform="rotate(45,14,14)"></rect>
                 <rect fill="currentColor" width="28" height="2" x="0" y="13" transform="rotate(-45,14,14)"></rect>
             </svg>
-            <svg class="grad-nav--only-closed" width="28" height="28" viewBox="0 0 28 28">
+            <svg aria-label="Navigations-Menü öffnen" class="grad-nav--only-closed" width="28" height="28" viewBox="0 0 28 28">
                 <rect fill="currentColor" width="28" height="2" x="0" y="3"></rect>
                 <rect fill="currentColor" width="28" height="2" x="0" y="13"></rect>
                 <rect fill="currentColor" width="28" height="2" x="0" y="23"></rect>
