@@ -1,14 +1,16 @@
 import styles from './assets/styles.scss';
 import adlerkopp from './assets/adlerkopp.svg';
 import { links, renderLink } from './links';
-import { DATA_URL_ATTRIBUTE } from './constants';
+import { BASE_URL, DATA_URL_ATTRIBUTE } from './constants';
 
 const template = document.createElement('template');
 
 template.innerHTML = `
     <style>${styles}</style>
     <nav class="grad-nav">
-        <img src="${adlerkopp}" alt="adlerkopp" style="cursor: pointer;" aria-hidden="true" height="48" width="48" ${DATA_URL_ATTRIBUTE}="/home" />
+        <a href="${BASE_URL}/home" ${DATA_URL_ATTRIBUTE}="/home" style="display:flex;">
+            <img src="${adlerkopp}" alt="adlerkopp" style="cursor: pointer;" aria-hidden="true" height="48" width="48" />
+        </a>
         <h1 class="grad-nav--only-small grad-nav--only-closed" style="font-weight: initial; margin: 0;"></h1>
         <div class="grad-nav__header grad-nav--only-large">
             <h1>Gruppe Adler</h1>
