@@ -1,6 +1,8 @@
 $navbar-height: 4.5rem;
 
-.grad-nav {
+$base-class: ".grad-nav";
+
+#{$base-class} {
     user-select: none;
     height: $navbar-height;
     display: grid;
@@ -65,22 +67,22 @@ $navbar-height: 4.5rem;
         margin: 0;
         padding: 0;
 
-        > .grad-nav__link-wrapper {
+        > #{$base-class}__link-wrapper {
             position: relative;
 
-            > .grad-nav__link.grad-nav--active { // active link in main links
+            > #{$base-class}__link#{$base-class}--active { // active link in main links
                 opacity: 1;
                 border-top-color: #D18D1F;
                 border-left-color: #D18D1F;
             }
 
-            &:hover .grad-nav__sub-links {
+            &:hover #{$base-class}__sub-links {
                 // hovering wrapper will show its sub links
                 visibility: initial !important;
             }
         }
 
-        &:hover .grad-nav--active + .grad-nav__sub-links {
+        &:hover #{$base-class}--active + #{$base-class}__sub-links {
             // when user hovers any link -> hide sub links of active link
             visibility: hidden;
         }
@@ -99,17 +101,17 @@ $navbar-height: 4.5rem;
         top: $navbar-height;
         left: 0;
 
-        .grad-nav__link {
+        #{$base-class}__link {
             border-top: .125rem solid transparent;
             border-bottom: .125rem solid transparent;
 
-            &.grad-nav--active { // active sub link
+            &#{$base-class}--active { // active sub link
                 opacity: 1;
                 border-bottom-color: white;
             }
         }
 
-        .grad-nav--active + & { // show subLinks from active link by default
+        #{$base-class}--active + & { // show subLinks from active link by default
             visibility: initial;
         }
 
@@ -134,7 +136,7 @@ $navbar-height: 4.5rem;
         -webkit-backdrop-filter: blur(.25rem);
         backdrop-filter: blur(.25rem);
 
-        > .grad-nav__sub-links {
+        > #{$base-class}__sub-links {
             visibility: initial;
             position: initial;
         }
@@ -169,12 +171,12 @@ $navbar-height: 4.5rem;
     }
 }
 
-.grad-nav:not(.grad-nav--small) .grad-nav__links,
-.grad-nav.grad-nav--open .grad-nav__links {
+#{$base-class}:not(#{$base-class}--small) #{$base-class}__links,
+#{$base-class}#{$base-class}--open #{$base-class}__links {
     display: flex;
 }
 
-.grad-nav.grad-nav--small .grad-nav__links {
+#{$base-class}#{$base-class}--small #{$base-class}__links {
     position: fixed;
     top: $navbar-height;
     left: 0;
@@ -186,11 +188,11 @@ $navbar-height: 4.5rem;
     z-index: 1000;
     background-color: black;
 
-    > .grad-nav__link-wrapper {
+    > #{$base-class}__link-wrapper {
         margin-top: .5rem;
         margin-bottom: .5rem;
 
-        > .grad-nav__link {
+        > #{$base-class}__link {
             line-height: 1.25rem;
             font-size: 1.25rem;
             padding: .25rem 0 .25rem 1.5rem;
@@ -205,21 +207,21 @@ $navbar-height: 4.5rem;
 }
 
 // only-small and only-large classes
-.grad-nav.grad-nav--small .grad-nav--only-large,
-.grad-nav:not(.grad-nav--small) .grad-nav--only-small {
+#{$base-class}#{$base-class}--small #{$base-class}--only-large,
+#{$base-class}:not(#{$base-class}--small) #{$base-class}--only-small {
     display: none;
 }
 
 // only-closed and only-opened classes
-.grad-nav.grad-nav--open .grad-nav--only-closed,
-.grad-nav:not(.grad-nav--open) .grad-nav--only-opened {
+#{$base-class}#{$base-class}--open #{$base-class}--only-closed,
+#{$base-class}:not(#{$base-class}--open) #{$base-class}--only-opened {
     display: none;
 }
 
 // grad-nav--sub-links-hidden
-.grad-nav.grad-nav--sub-links-hidden {
-    .grad-nav__sub-links,
-    .grad-nav__sub-link-bar {
+#{$base-class}#{$base-class}--sub-links-hidden {
+    #{$base-class}__sub-links,
+    #{$base-class}__sub-link-bar {
         display: none !important;
     }
 }
