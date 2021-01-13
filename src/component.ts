@@ -140,7 +140,6 @@ export default class GradNavbar extends HTMLElement {
      * @returns If change path event was canceled
      */
     private changePath(val: string): boolean {
-        if (val === this._activePath) return true;
         this._activePath = val;
 
         this.setAttribute('active-path', val);
