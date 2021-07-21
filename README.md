@@ -1,6 +1,6 @@
-# Gruppe Adler Navbar Web Component
+# Gruppe Adler Navbar WebComponent
 
-Gruppe Adler navbar Web Component.
+Gruppe Adler navbar WebComponent.
 
 ## NPM
 This component can be found on [npm](https://www.npmjs.com/package/@gruppe-adler/navbar-component).
