@@ -12,16 +12,16 @@ export default class GradNavbar extends HTMLElement {
     constructor () {
         super();
         this.attachShadow({ mode: 'open' });
-        this.shadowRoot.appendChild(template.content.cloneNode(true));
+        this.shadowRoot?.appendChild(template.content.cloneNode(true));
 
         // add expand / collapse button click listener
-        const btn = this.shadowRoot.querySelector('nav > button');
+        const btn = this.shadowRoot?.querySelector('nav > button') ?? null;
         if (btn !== null) btn.addEventListener('click', () => { this.expanded = !this.expanded; });
 
         // add nav link click EHs to all elements which have a DATA_URL_ATTRIBUTE
-        this.shadowRoot.querySelectorAll(`[${DATA_URL_ATTRIBUTE}]`).forEach(this.addNavLinkEH, this);
+        this.shadowRoot?.querySelectorAll(`[${DATA_URL_ATTRIBUTE}]`).forEach(this.addNavLinkEH, this);
 
-        const navEl = this.shadowRoot.querySelector('nav');
+        const navEl = this.shadowRoot?.querySelector('nav') ?? null;
         if (navEl !== null) {
             // This resize observer is used to update the small attribute
             const resizeObserver = new ResizeObserver(entries => {
@@ -63,7 +63,7 @@ export default class GradNavbar extends HTMLElement {
         this.render();
 
         window.requestAnimationFrame(() => {
-            const navEl = this.shadowRoot.querySelector('nav');
+            const navEl = this.shadowRoot?.querySelector('nav') ?? null;
             if (navEl === null) return;
 
             const { width } = navEl.getBoundingClientRect();
@@ -94,7 +94,7 @@ export default class GradNavbar extends HTMLElement {
                 break;
             case 'nav-style':
                 {
-                    const navEl = this.shadowRoot.querySelector('nav');
+                    const navEl = this.shadowRoot?.querySelector('nav') ?? null;
 
                     if (navEl === null) break;
 
@@ -160,7 +160,7 @@ export default class GradNavbar extends HTMLElement {
      * @param enabled Whether class is added or removed
      */
     private toggleRootClass (className: string, enabled: boolean): void {
-        const navEl = this.shadowRoot.querySelector('nav');
+        const navEl = this.shadowRoot?.querySelector('nav') ?? null;
         if (navEl === null) return;
 
         if (enabled) {
@@ -186,11 +186,13 @@ export default class GradNavbar extends HTMLElement {
      * Prevents sublinks to clip outside the right window border
      */
     private fixSubLinksOffset (): void {
+        if (this.shadowRoot === null) return;
+
         // find all sub link containers
         const subLinkContainers: HTMLDivElement[] = Array.from(this.shadowRoot.querySelectorAll('.grad-nav__link-wrapper > .grad-nav__sub-links'));
 
         // get the right edge of the sub-link bar
-        const subLinkBar: HTMLDivElement = this.shadowRoot.querySelector('.grad-nav__sub-link-bar');
+        const subLinkBar: HTMLDivElement | null = this.shadowRoot.querySelector('.grad-nav__sub-link-bar');
         if (!subLinkBar) return;
         const paddingRight = Number.parseInt(window.getComputedStyle(subLinkBar).getPropertyValue('padding-right'), 10);
         const maxRight = subLinkBar.getBoundingClientRect().right - paddingRight;
@@ -209,20 +211,26 @@ export default class GradNavbar extends HTMLElement {
      * Render navbar
      */
     private render (): void {
+        if (this.shadowRoot === null) return;
+
         const { link, subLink } = this.getActiveLinkAndSubLink();
 
         // add sub-links to bar for display mode small
+        const subLinksEl = this.shadowRoot.querySelector('.grad-nav__sub-link-bar > .grad-nav__sub-links');
+
         if (link.subLinks !== undefined) {
             const html = link.subLinks.map(sub => renderSubLink(link, sub)).join('\n');
 
-            this.shadowRoot.querySelector('.grad-nav__sub-link-bar > .grad-nav__sub-links').innerHTML = html;
+            if (subLinksEl) subLinksEl.innerHTML = html;
         } else {
-            this.shadowRoot.querySelector('.grad-nav__sub-link-bar > .grad-nav__sub-links').innerHTML = '';
+            if (subLinksEl) subLinksEl.innerHTML = '';
         }
 
         // update texts
-        this.shadowRoot.querySelector('.grad-nav__sub-link-bar > span').innerHTML = subLink !== null ? subLink.text : link.text;
-        this.shadowRoot.querySelector('.grad-nav > h1').innerHTML = link.text;
+        const spanEl = this.shadowRoot.querySelector('.grad-nav__sub-link-bar > span');
+        if (spanEl) spanEl.innerHTML = subLink !== null ? subLink.text : link.text;
+        const h1El = this.shadowRoot.querySelector('.grad-nav > h1');
+        if (h1El) h1El.innerHTML = link.text;
 
         // Update css classes of all .grad-nav__link elements
         this.shadowRoot.querySelectorAll('.grad-nav__link').forEach(el => {
