@@ -15,7 +15,7 @@ module.exports = (env, options) => {
     return {
         entry: './src/index.ts',
         mode: 'production',
-        target: 'es2015',
+        target: 'web',
         plugins: [
             new ESLintPlugin({ extensions: ['ts', 'js', 'tsx', 'jsx'] }),
             ...modePlugins
@@ -51,7 +51,7 @@ module.exports = (env, options) => {
         },
         devServer: {
             port: 3000,
-            contentBase: path.join(__dirname, 'dist')
+            static: path.join(__dirname, 'dist')
         },
         resolve: {
             extensions: ['.tsx', '.ts', '.js', '.scss']
