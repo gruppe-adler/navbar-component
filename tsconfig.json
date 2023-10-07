@@ -6,6 +6,7 @@
         "declaration": true,
         "outDir": "lib",
         "lib" :["dom", "es2015"],
-        "types": ["resize-observer-browser", "css-font-loading-module"]
+        "types": ["resize-observer-browser", "css-font-loading-module"],
+        "strictNullChecks": true
     }
   }
