@@ -1,14 +1,14 @@
 import { BASE_URL, DATA_URL_ATTRIBUTE } from './constants';
 
 export interface GradSubLink {
-    text: string;
-    url: string;
-    displayName?: string;
+    text: string
+    url: string
+    displayName?: string
 }
 
 export interface GradLink extends GradSubLink {
-    externalURL?: string;
-    subLinks?: GradSubLink[];
+    externalURL?: string
+    subLinks?: GradSubLink[]
 }
 
 export const links: GradLink[] = [
@@ -93,7 +93,7 @@ export const links: GradLink[] = [
  * @param {GradSubLink} subLink Sub-link to render
  * @returns {string} rendered HTML
  */
-export function renderSubLink(link: GradLink, subLink: GradSubLink): string {
+export function renderSubLink (link: GradLink, subLink: GradSubLink): string {
     const url = link.externalURL || BASE_URL + link.url;
 
     return `<li><a class="grad-nav__link" href="${url + subLink.url}" ${DATA_URL_ATTRIBUTE}="${link.url + subLink.url}">${subLink.text}</a></li>`;

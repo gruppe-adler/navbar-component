@@ -1,5 +1,5 @@
 import { DATA_URL_ATTRIBUTE, SMALL_BREAKPOINT } from './constants';
-import { GradLink, GradSubLink, links, renderSubLink } from './links';
+import { type GradLink, type GradSubLink, links, renderSubLink } from './links';
 import GradPathChangedEvent from './PathChangedEvent';
 import template from './template';
 
@@ -9,7 +9,7 @@ export default class GradNavbar extends HTMLElement {
     private _subLinksHidden = false;
     private _activePath = '';
 
-    constructor() {
+    constructor () {
         super();
         this.attachShadow({ mode: 'open' });
         this.shadowRoot.appendChild(template.content.cloneNode(true));
@@ -59,7 +59,7 @@ export default class GradNavbar extends HTMLElement {
     /**
      * The connectedCallback() runs each time the element is added to the DOM.
      */
-    connectedCallback(): void {
+    connectedCallback (): void {
         this.render();
 
         window.requestAnimationFrame(() => {
@@ -72,7 +72,7 @@ export default class GradNavbar extends HTMLElement {
         });
     }
 
-    static get observedAttributes(): string[] {
+    static get observedAttributes (): string[] {
         return ['sublinks-hidden', 'active-path', 'nav-style'];
     }
 
@@ -82,64 +82,64 @@ export default class GradNavbar extends HTMLElement {
      * @param oldValue Old attribute value
      * @param newValue New attribute value
      */
-    attributeChangedCallback(name: string, oldValue: string|null, newValue: string|null): void {
+    attributeChangedCallback (name: string, oldValue: string | null, newValue: string | null): void {
         if (oldValue === newValue) return;
 
         switch (name) {
-        case 'sublinks-hidden':
-            this.subLinksHidden = newValue !== null;
-            break;
-        case 'active-path':
-            this.changePath(newValue === null ? '' : newValue);
-            break;
-        case 'nav-style':
-            {
-                const navEl = this.shadowRoot.querySelector('nav');
+            case 'sublinks-hidden':
+                this.subLinksHidden = newValue !== null;
+                break;
+            case 'active-path':
+                this.changePath(newValue === null ? '' : newValue);
+                break;
+            case 'nav-style':
+                {
+                    const navEl = this.shadowRoot.querySelector('nav');
 
-                if (navEl === null) break;
+                    if (navEl === null) break;
 
-                if (newValue === null) {
-                    navEl.removeAttribute('style');
-                } else {
-                    navEl.setAttribute('style', newValue);
+                    if (newValue === null) {
+                        navEl.removeAttribute('style');
+                    } else {
+                        navEl.setAttribute('style', newValue);
+                    }
                 }
-            }
-            break;
+                break;
         }
     }
 
-    private get small(): boolean { return this._small; }
-    private set small(val: boolean) {
+    private get small (): boolean { return this._small; }
+    private set small (val: boolean) {
         if (val === this._small) return;
         this._small = val;
 
         this.toggleRootClass('grad-nav--small', val);
     }
 
-    private get expanded(): boolean { return this._expanded; }
-    private set expanded(val: boolean) {
+    private get expanded (): boolean { return this._expanded; }
+    private set expanded (val: boolean) {
         if (val === this._expanded) return;
         this._expanded = val;
 
         this.toggleRootClass('grad-nav--open', val);
     }
 
-    private get subLinksHidden(): boolean { return this._subLinksHidden; }
-    private set subLinksHidden(val: boolean) {
+    private get subLinksHidden (): boolean { return this._subLinksHidden; }
+    private set subLinksHidden (val: boolean) {
         if (val === this._subLinksHidden) return;
         this._subLinksHidden = val;
 
         this.toggleRootClass('grad-nav--sub-links-hidden', val);
     }
 
-    private get activePath(): string { return this._activePath; }
+    private get activePath (): string { return this._activePath; }
 
     /**
      * Change active path.
      * @param val New path
      * @returns If change path event was canceled
      */
-    private changePath(val: string): boolean {
+    private changePath (val: string): boolean {
         this._activePath = val;
 
         this.setAttribute('active-path', val);
@@ -174,7 +174,7 @@ export default class GradNavbar extends HTMLElement {
      * Get active GradLink and GradSubLink according to current
      * activePath attribute.
      */
-    private getActiveLinkAndSubLink(): { link: GradLink, subLink: GradSubLink|null } {
+    private getActiveLinkAndSubLink (): { link: GradLink, subLink: GradSubLink | null } {
         const url = `/${this.activePath.split('/')[1]}`;
         const subURL = this.activePath.replace(new RegExp(`^${url}`, 'i'), '');
 
@@ -208,7 +208,7 @@ export default class GradNavbar extends HTMLElement {
     /**
      * Render navbar
      */
-    private render() {
+    private render () {
         const { link, subLink } = this.getActiveLinkAndSubLink();
 
         // add sub-links to bar for display mode small
@@ -238,7 +238,7 @@ export default class GradNavbar extends HTMLElement {
         });
 
         document.fonts.ready.then(() => {
-            window.requestAnimationFrame(() => this.fixSubLinksOffset());
+            window.requestAnimationFrame(() => { this.fixSubLinksOffset(); });
         });
     }
 
@@ -246,7 +246,7 @@ export default class GradNavbar extends HTMLElement {
      * Add onNavClick method as click event handler
      * @param element Element to event handler to
      */
-    private addNavLinkEH(element: Element) {
+    private addNavLinkEH (element: Element) {
         element.addEventListener('click', this.onNavLinkClick.bind(this));
     }
 
@@ -254,10 +254,10 @@ export default class GradNavbar extends HTMLElement {
      * Event handler for clicking on link
      * @param event Event
      */
-    private onNavLinkClick(event: MouseEvent) {
+    private onNavLinkClick (event: MouseEvent) {
         const elements = event.composedPath() as HTMLElement[];
 
-        let url: string|null = null;
+        let url: string | null = null;
 
         for (const el of elements) {
             const elURL = el.getAttribute(DATA_URL_ATTRIBUTE);
