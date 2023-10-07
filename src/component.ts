@@ -90,7 +90,7 @@ export default class GradNavbar extends HTMLElement {
                 this.subLinksHidden = newValue !== null;
                 break;
             case 'active-path':
-                this.changePath(newValue === null ? '' : newValue);
+                this.changePath(newValue ?? '');
                 break;
             case 'nav-style':
                 {
@@ -148,8 +148,8 @@ export default class GradNavbar extends HTMLElement {
 
         const { link, subLink } = this.getActiveLinkAndSubLink();
 
-        const l = subLink || link;
-        const displayName = l.displayName || l.text;
+        const l = subLink ?? link;
+        const displayName = l.displayName ?? l.text;
 
         return !this.dispatchEvent(new GradPathChangedEvent(val, displayName));
     }
@@ -159,7 +159,7 @@ export default class GradNavbar extends HTMLElement {
      * @param className CSS class
      * @param enabled Whether class is added or removed
      */
-    private toggleRootClass (className: string, enabled: boolean) {
+    private toggleRootClass (className: string, enabled: boolean): void {
         const navEl = this.shadowRoot.querySelector('nav');
         if (navEl === null) return;
 
@@ -178,14 +178,14 @@ export default class GradNavbar extends HTMLElement {
         const url = `/${this.activePath.split('/')[1]}`;
         const subURL = this.activePath.replace(new RegExp(`^${url}`, 'i'), '');
 
-        const link = links.find(l => l.url === url) || { text: '', url: '' };
-        return { link, subLink: (link.subLinks || []).find(l => l.url === subURL) || null };
+        const link = links.find(l => l.url === url) ?? { text: '', url: '' };
+        return { link, subLink: (link.subLinks ?? []).find(l => l.url === subURL) ?? null };
     }
 
     /**
      * Prevents sublinks to clip outside the right window border
      */
-    private fixSubLinksOffset () {
+    private fixSubLinksOffset (): void {
         // find all sub link containers
         const subLinkContainers: HTMLDivElement[] = Array.from(this.shadowRoot.querySelectorAll('.grad-nav__link-wrapper > .grad-nav__sub-links'));
 
@@ -208,7 +208,7 @@ export default class GradNavbar extends HTMLElement {
     /**
      * Render navbar
      */
-    private render () {
+    private render (): void {
         const { link, subLink } = this.getActiveLinkAndSubLink();
 
         // add sub-links to bar for display mode small
@@ -237,7 +237,7 @@ export default class GradNavbar extends HTMLElement {
             }
         });
 
-        document.fonts.ready.then(() => {
+        void document.fonts.ready.then(() => {
             window.requestAnimationFrame(() => { this.fixSubLinksOffset(); });
         });
     }
@@ -246,7 +246,7 @@ export default class GradNavbar extends HTMLElement {
      * Add onNavClick method as click event handler
      * @param element Element to event handler to
      */
-    private addNavLinkEH (element: Element) {
+    private addNavLinkEH (element: Element): void {
         element.addEventListener('click', this.onNavLinkClick.bind(this));
     }
 
@@ -254,7 +254,7 @@ export default class GradNavbar extends HTMLElement {
      * Event handler for clicking on link
      * @param event Event
      */
-    private onNavLinkClick (event: MouseEvent) {
+    private onNavLinkClick (event: MouseEvent): void {
         const elements = event.composedPath() as HTMLElement[];
 
         let url: string | null = null;

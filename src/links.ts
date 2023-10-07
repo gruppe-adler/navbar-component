@@ -94,7 +94,7 @@ export const links: GradLink[] = [
  * @returns {string} rendered HTML
  */
 export function renderSubLink (link: GradLink, subLink: GradSubLink): string {
-    const url = link.externalURL || BASE_URL + link.url;
+    const url = link.externalURL ?? BASE_URL + link.url;
 
     return `<li><a class="grad-nav__link" href="${url + subLink.url}" ${DATA_URL_ATTRIBUTE}="${link.url + subLink.url}">${subLink.text}</a></li>`;
 }
@@ -105,7 +105,7 @@ export function renderSubLink (link: GradLink, subLink: GradSubLink): string {
  * @returns {string} rendered HTML
  */
 export function renderLink (link: GradLink): string {
-    const url = link.externalURL || BASE_URL + link.url;
+    const url = link.externalURL ?? BASE_URL + link.url;
 
     let subLinkText = '';
     if (link.subLinks !== undefined) {
